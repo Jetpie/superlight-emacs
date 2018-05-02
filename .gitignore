@@ -1,0 +1,7 @@
+# compiled
+*.elc
+
+.smex-items
+auto-save-list/
+elpa/
+ido.last
