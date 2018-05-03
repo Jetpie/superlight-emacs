@@ -154,6 +154,8 @@ re-downloaded in order to locate PACKAGE."
 
 (setq-default
  make-backup-files nil
+ indent-tabs-mode nil
+ case-fold-search t
  scroll-preserve-screen-position 'always
  visible-bell nil
  )
