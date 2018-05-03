@@ -2,6 +2,9 @@
 *.elc
 
 .smex-items
+smex-items
 auto-save-list/
 elpa/
 ido.last
+ido.last~
+network-security.data
