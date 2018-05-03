@@ -79,16 +79,11 @@ re-downloaded in order to locate PACKAGE."
 (setq use-dialog-box nil)
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-echo-area-message t)
-(if (fboundp 'fringe-mode)
-    (fringe-mode 4))
 
 ;;; cursor setting
 (set-default 'cursor-type 'box)
 (set-cursor-color "#ffffff")
 (blink-cursor-mode 0)
-
-;;; parenthesis highlight
-(show-paren-mode t)
 
 ;;; Line Setting
 ;; highlight
@@ -112,9 +107,10 @@ re-downloaded in order to locate PACKAGE."
 
 ;;; Column Setting
 (column-number-mode t)
-
-(winner-mode t)
-(windmove-default-keybindings)
+(when (fboundp 'winner-mode)
+  (winner-mode t))
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs Functionality
@@ -142,6 +138,9 @@ re-downloaded in order to locate PACKAGE."
 ;;; autopair
 (require-package 'autopair)
 (autopair-global-mode t)
+
+;;; parenthesis highlight
+(show-paren-mode t)
 
 ;;; undo-tree
 (require-package 'undo-tree)
