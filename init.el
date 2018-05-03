@@ -1,19 +1,52 @@
 ;;;; DESCRIPTION
+;;;;+-----------+
+;;;; A super light-weighted emacs one-page conifg that implemented
+;;;; minimum requirement of programming on language like c++/python
 ;;;;
-;;;; A super light-weighted emacs one-page conifg that implemented 
-;;;; minimum requirement of programming
-;;;;
-;;;; Brief Function List:
+;;;; BRIEF FUNCTION LIST
+;;;;+-------------------+
 ;;;; * Theme Setting
 ;;;;   - zenburn
 ;;;; * Basic and Classical GUI Setting
-;;;;   -
+;;;;   - common useless frame elements suppress
+;;;;   - cursor style & positioning visualization
+;;;; * Emac Functionality
+;;;;   - ido/smex/window-switch etc..
+;;;; * Editting Settings
+;;;;   - auto-complete/pairing/undo-tree/ace-jump-mode/100 column indicator/multiple-cursor
+;;;; * Programming Settings
+;;;;   - Company
+;;;;   - C/C++ Coding Styles (and very basic settings)
+;;;;   - Python (very basic settings)
+;;;; * Extensions
 ;;;;
 ;;;; LICENSE
-
-;;;; AUTHOR : Bingqing Qu
-
-;;;;;;;;;;;;; LET'S START FROM HERE ;;;;;;;;;;;;;
+;;;;+-------+
+;;;; Copyright (c) 2018-2019 Bingqing Qu <sylar.qu@gmail.com>
+;;;; All rights reserved.
+;;;; Redistribution and use in source and binary forms, with or without
+;;;; modification, are permitted provided that the following conditions are
+;;;; met:
+;;;;     * Redistributions of source code must retain the above copyright
+;;;; notice, this list of conditions and the following disclaimer.
+;;;;     * Redistributions in binary form must reproduce the above copyright
+;;;; notice, this list of conditions and the following disclaimer in the
+;;;; documentation and/or other materials provided with the distribution.
+;;;; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+;;;; "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+;;;; LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+;;;; A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+;;;; HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+;;;; SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+;;;; LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+;;;; DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+;;;; THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+;;;; (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+;;;; OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+;;;;
+;;;; ----------------------------------------------------------------------
+;;;; Author : Bingqing Qu
+;;;; Version: 0.0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global Operating System Setting
@@ -51,6 +84,7 @@ re-downloaded in order to locate PACKAGE."
 
 (setq package-enable-at-startup nil)
 (package-initialize)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global Theme Setting
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -116,6 +150,13 @@ re-downloaded in order to locate PACKAGE."
 ;; Emacs Functionality
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (fset 'yes-or-no-p 'y-or-n-p)
+
+(setq-default
+ make-backup-files nil
+ scroll-preserve-screen-position 'always
+ visible-bell nil
+ )
+
 ;;; ido mode and smex
 (require 'ido)
 (ido-mode t)
@@ -187,11 +228,18 @@ re-downloaded in order to locate PACKAGE."
 ;;; automatically indent when press RET
 (global-set-key (kbd "RET") 'newline-and-indent)
 
-;; activate whitespace-mode to view all whitespace characters
+;;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
-;; show unncessary whitespace that can mess up your diff
+;;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook (lambda () (interactive) (setq show-trailing-whitespace 1)))
+
+;;; company
+;;; more *LANGUAGE* specific company (backend) settings are put at the *LANGUAGE* section
+(require-package 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0.1)
+(setq company-minimum-prefix-length 3)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;; C++
@@ -229,6 +277,17 @@ re-downloaded in order to locate PACKAGE."
 (defun namespace-no-indent ()
   (c-set-offset 'innamespace [0]))
 (add-hook 'c++-mode-hook 'namespace-no-indent)
+
+;; TODO: find a solution that ensure the irony-server can be installed before using.
+;; ;;; C/C++ company
+;; (with-eval-after-load 'company
+;;     (require-package 'company-irony)
+;;     (add-to-list 'company-backends 'company-irony)
+;;     (require-package 'irony)
+;;     (add-hook 'c++-mode-hook 'irony-mode)
+;;     (add-hook 'c-mode-hook 'irony-mode)
+;;     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;;     )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;; Python
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -255,4 +314,4 @@ re-downloaded in order to locate PACKAGE."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (multiple-cursors column-enforce-mode ace-jump-mode switch-window powerline undo-tree autopair nlinum auto-complete-config auto-complete smex zenburn-theme popup highlight-current-line))))
+    (company-irony company multiple-cursors column-enforce-mode ace-jump-mode switch-window powerline undo-tree autopair nlinum auto-complete-config auto-complete smex zenburn-theme popup highlight-current-line))))
