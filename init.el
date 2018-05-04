@@ -1,4 +1,4 @@
-;; init.el -- main initial config file superlight-emacs
+;; init.el -- main initial config file for superlight-emacs
 
 ;; --- Description:
 ;; A super light-weighted emacs one-page conifg that implemented
@@ -152,6 +152,7 @@ re-downloaded in order to locate PACKAGE."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;;; common settings
 (setq-default
  make-backup-files nil
  indent-tabs-mode nil
@@ -163,6 +164,11 @@ re-downloaded in order to locate PACKAGE."
 ;;; ido mode and smex
 (require 'ido)
 (ido-mode t)
+(ido-everywhere t)
+(setq ido-enable-flex-matching t)
+(setq ido-use-filename-at-point nil)
+(setq ido-auto-merge-work-directories-length 0)
+(setq ido-use-virtual-buffers t)
 
 (require-package 'smex)
 (global-set-key (kbd "M-x") 'smex)
@@ -170,8 +176,15 @@ re-downloaded in order to locate PACKAGE."
 
 ;;; switch window
 (require-package 'switch-window)
+(require 'switch-window)
 (global-set-key (kbd "C-x o") 'switch-window)
 
+;;; recent buffers
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 10
+      recentf-exclude '("tmp/" "ssh:"))
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Editing Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
