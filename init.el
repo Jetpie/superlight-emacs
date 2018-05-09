@@ -161,7 +161,7 @@ re-downloaded in order to locate PACKAGE."
  visible-bell nil
  )
 
-;;; ido mode and smex
+;;; ido
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
@@ -170,6 +170,7 @@ re-downloaded in order to locate PACKAGE."
 (setq ido-auto-merge-work-directories-length 0)
 (setq ido-use-virtual-buffers t)
 
+;;; smex
 (require-package 'smex)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
