@@ -124,12 +124,9 @@ re-downloaded in order to locate PACKAGE."
 ;; highlight
 (require-package 'highlight-current-line)
 (global-hl-line-mode t)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(hl-line ((t (:background "brightblack" :underline t)))))
+;; set face color for theme zenburn
+(set-face-background 'hl-line "brightblack")
+(set-face-underline 'hl-line t)
 
 ;; line numbers
 (line-number-mode t)
@@ -161,7 +158,7 @@ re-downloaded in order to locate PACKAGE."
  visible-bell nil
  )
 
-;;; ido mode and smex
+;;; ido
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
@@ -170,6 +167,7 @@ re-downloaded in order to locate PACKAGE."
 (setq ido-auto-merge-work-directories-length 0)
 (setq ido-use-virtual-buffers t)
 
+;;; smex
 (require-package 'smex)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
