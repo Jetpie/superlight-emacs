@@ -135,7 +135,7 @@ re-downloaded in order to locate PACKAGE."
 (nlinum-mode t)
 
 ;; wrap line
-(visual-line-mode t)
+(global-visual-line-mode t)
 
 ;;; Column Setting
 (column-number-mode t)
@@ -317,6 +317,16 @@ re-downloaded in order to locate PACKAGE."
 (setq py-split-windows-on-execute-p nil)
 ; try to automagically figure out indentation
 (setq py-smart-indentation t)
+
+;;----------------------------------------------------------------------------------------------
+;;----------------------------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;; Org Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'org)
+(setq org-todo-keywords
+  '((sequence "TODO" "IN-PROGRESS" "PENDING" "DONE")))
 
 ;;----------------------------------------------------------------------------------------------
 ;;----------------------------------------------------------------------------------------------
