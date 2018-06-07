@@ -125,7 +125,9 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'highlight-current-line)
 (global-hl-line-mode t)
 ;; set face color for theme zenburn
-(set-face-background 'hl-line "brightblack")
+;; (set-face-background 'hl-line "brightblack")
+(set-face-background 'hl-line "SteelBlue4")
+(set-face-foreground 'highlight nil)
 (set-face-underline 'hl-line t)
 
 ;; line numbers
@@ -194,8 +196,14 @@ re-downloaded in order to locate PACKAGE."
 (require-package 'autopair)
 (autopair-global-mode t)
 
+
 ;;; parenthesis highlight
 (show-paren-mode t)
+
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
 
 ;;; undo-tree
 (require-package 'undo-tree)
@@ -208,11 +216,11 @@ re-downloaded in order to locate PACKAGE."
 ;; (global-set-key (kbd "C-:") 'ace-jump-word-mode)
 
 ;;; 80/100 column indicator
-(require-package 'column-enforce-mode)
-(global-column-enforce-mode t)
-(setq column-enforce-column 100)
-;; active this if comment is excluded
-(setq column-enforce-comments nil)
+;; (require-package 'column-enforce-mode)
+;; (global-column-enforce-mode t)
+;; (setq column-enforce-column 100)
+;; ;; active this if comment is excluded
+;; (setq column-enforce-comments nil)
 
 ;;; multiple-cursors
 (require-package 'multiple-cursors)
@@ -338,4 +346,4 @@ re-downloaded in order to locate PACKAGE."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-irony company multiple-cursors column-enforce-mode ace-jump-mode switch-window powerline undo-tree autopair nlinum auto-complete-config auto-complete smex zenburn-theme popup highlight-current-line))))
+    (smooth-scrolling company-irony company multiple-cursors column-enforce-mode ace-jump-mode switch-window powerline undo-tree autopair nlinum auto-complete-config auto-complete smex zenburn-theme popup highlight-current-line))))
