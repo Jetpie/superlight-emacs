@@ -189,7 +189,7 @@ re-downloaded in order to locate PACKAGE."
 ;; Editing Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; auto-complete
-(require-package 'auto-complete)
+;; (require-package 'auto-complete)
 ;; (ac-config-default t)
 
 ;;; autopair
@@ -260,6 +260,7 @@ re-downloaded in order to locate PACKAGE."
 ;;; more *LANGUAGE* specific company (backend) settings are put at the *LANGUAGE* section
 (require-package 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-global-modes '(not python-mode))
 (setq company-idle-delay 0.1)
 (setq company-minimum-prefix-length 3)
 
